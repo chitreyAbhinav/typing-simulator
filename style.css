@@ -1,0 +1,241 @@
+/* ---------------------------------------------------
+   RESET
+--------------------------------------------------- */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html, body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    font-family: "Poppins", sans-serif;
+}
+
+/* ---------------------------------------------------
+   BACKGROUND — NEON AURA + GRID
+--------------------------------------------------- */
+body {
+    background: radial-gradient(circle at center, #0d001a, #000000 75%);
+    color: #e3eeff;
+    position: relative;
+}
+
+body::before {
+    content: "";
+    position: absolute;
+    width: 200%;
+    height: 200%;
+    left: -50%;
+    top: -50%;
+    background: conic-gradient(
+        from 0deg,
+        #7f00ff,
+        #00eaff,
+        #ff00ff,
+        #7f00ff
+    );
+    filter: blur(220px);
+    opacity: 0.22;
+    animation: neonRotate 16s linear infinite;
+    z-index: -2;
+}
+
+@keyframes neonRotate {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+body::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image:
+        linear-gradient(rgba(255,255,255,0.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.06) 1px, transparent 1px);
+    background-size: 40px 40px;
+    z-index: -1;
+}
+
+/* ---------------------------------------------------
+   GLASS PANELS
+--------------------------------------------------- */
+.glass-panel {
+    background: rgba(255, 255, 255, 0.07);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    padding: 32px 40px;
+    border-radius: 20px;
+    width: 420px;
+    text-align: center;
+    border: 1px solid rgba(255,255,255,0.25);
+    box-shadow: 0 0 30px rgba(0, 200, 255, 0.4);
+}
+
+.neon-pulse {
+    animation: pulseNeon 2.6s infinite ease-in-out;
+}
+
+@keyframes pulseNeon {
+    0% { box-shadow: 0 0 25px rgba(0,200,255,0.5); }
+    50% { box-shadow: 0 0 40px rgba(255,0,255,0.6); }
+    100% { box-shadow: 0 0 25px rgba(0,200,255,0.5); }
+}
+
+/* ---------------------------------------------------
+   TITLES
+--------------------------------------------------- */
+#game-title {
+    font-size: 38px;
+    font-weight: 700;
+    background: linear-gradient(90deg, #00d9ff, #ff00de);
+    -webkit-background-clip: text;
+    color: transparent;
+    margin-bottom: 20px;
+}
+
+#subtitle {
+    color: #b9d7ff;
+    margin-bottom: 20px;
+}
+
+/* ---------------------------------------------------
+   INPUTS
+--------------------------------------------------- */
+#player-name, #word-input {
+    width: 260px;
+    padding: 14px;
+    font-size: 18px;
+    border-radius: 10px;
+    border: 2px solid rgba(0,200,255,0.5);
+    background: rgba(0, 0, 0, 0.35);
+    color: #e8f3ff;
+    text-align: center;
+    outline: none;
+}
+
+#word-input {
+    width: 350px;
+}
+
+#player-name::placeholder,
+#word-input::placeholder {
+    color: #9acff7;
+}
+
+.input-wrong {
+    border-color: #ff2e63 !important;
+    animation: wrongFlash 0.25s;
+}
+
+@keyframes wrongFlash {
+    from { background: rgba(255,60,90,0.4); }
+    to { background: rgba(0,0,0,0.35); }
+}
+
+.input-correct {
+    border-color: #00ffa6 !important;
+    animation: correctFlash 0.35s;
+}
+
+@keyframes correctFlash {
+    from { background: rgba(0,255,160,0.3); }
+    to { background: rgba(0,0,0,0.35); }
+}
+
+/* ---------------------------------------------------
+   BUTTONS
+--------------------------------------------------- */
+.neon-button {
+    width: 160px;
+    margin-top: 15px;
+    padding: 12px 30px;
+    background: linear-gradient(90deg, #00eaff, #ff00ff);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 16px;
+    transition: 0.25s;
+    box-shadow: 0 0 15px rgba(0,200,255,0.6);
+}
+
+.neon-button:hover {
+    transform: scale(1.08);
+    box-shadow: 0 0 25px rgba(255,0,255,0.9);
+}
+
+/* ---------------------------------------------------
+   CANVAS
+--------------------------------------------------- */
+#game-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw !important;
+    height: 100vh !important;
+    z-index: 1;
+}
+
+/* ---------------------------------------------------
+   PANELS CENTERING
+--------------------------------------------------- */
+#start-screen,
+#game-over-screen {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: none;
+    z-index: 20;
+}
+
+#start-screen {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+}
+
+/* ---------------------------------------------------
+   INPUT BAR FIX — hidden until game starts
+--------------------------------------------------- */
+#input-area {
+    display: none;
+    position: absolute;
+    bottom: 40px;       /* ✅ Move to bottom */
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+}
+
+
+/* ---------------------------------------------------
+   SCORE POPUP
+--------------------------------------------------- */
+.score-pop {
+    position: absolute;
+    color: #00eaff;
+    font-size: 22px;
+    font-weight: bold;
+    animation: scoreFloat 0.6s ease-out forwards;
+}
+
+@keyframes scoreFloat {
+    from { opacity: 1; transform: translateY(0); }
+    to { opacity: 0; transform: translateY(-25px); }
+}
+
+.game-over-text {
+    font-size: 45px;
+    font-weight: 700;
+    color: #ff3b8d;
+    text-shadow: 0 0 20px rgba(255,0,120,0.8);
+}
+#word-input {
+    box-shadow: 0 0 20px rgba(0,255,255,0.6);
+}
+#player-name {
+    box-shadow: 0 0 20px rgba(0,255,255,0.6);
+}

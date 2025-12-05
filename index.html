@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Neon Typing Challenge</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- START SCREEN -->
+  <div id="start-screen" class="glass-panel neon-pulse">
+    <h1 id="game-title">NEON TYPING<br />CHALLENGE</h1>
+    <p id="subtitle">Enter your name to begin</p>
+
+    <input type="text" id="player-name" placeholder="Your Name" />
+    <button class="neon-button" id="start-btn" type="button">Start Game</button>
+  </div>
+
+  <!-- GAME AREA -->
+  <div id="game-container">
+    <canvas id="game-canvas"></canvas>
+
+    <div id="input-area">
+      <input type="text" id="word-input" placeholder="Type here..." autocomplete="off" autofocus/>
+    </div>
+  </div>
+
+  <!-- GAME OVER -->
+  <div id="game-over-screen" class="glass-panel neon-pulse">
+    <h1 class="game-over-text">GAME OVER</h1>
+    <p id="final-score"></p>
+    <div class="actions">
+      <button class="neon-button" id="restart-btn" type="button">Restart</button>
+      <a class="neon-button link" href="leaderboard.php">Leaderboard</a>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
